@@ -1,0 +1,15 @@
+name, 
+group,
+ssc-exam-roll,
+ssc-exam-registration number,
+
+institution_name,
+t-shirt-size,
+bkash_number,
+tnxId,
+
+phone_number,
+whatsapp_number,
+present_address,
+permanent_address
+
