@@ -7,12 +7,14 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const RegistrationForm = () => {
   const [loading, setLoading] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
   const submitForm = async (data) => {
@@ -27,9 +29,9 @@ const RegistrationForm = () => {
       console.log("Backend response:", response.data);
 
       if (response.data.success || response.data.insertedId) {
-        // Save registration data to localStorage
         toast.success("Registration successful!");
-        navigate("/my-registration");
+        reset();
+        setShowSuccessModal(true);
       } else {
         toast.error("Registration failed");
       }
@@ -68,13 +70,13 @@ const RegistrationForm = () => {
         <div className="mb-6 grid grid-cols-1 gap-4 rounded-2xl border border-blue-100 bg-blue-50 p-3 md:grid-cols-2 md:p-6 shadow-sm">
           {/* Name English */}
           <div>
-            <label className="label dark:text-gray-300">Name *</label>
+            <label className="label">Name *</label>
             <input
               {...register("name_en", {
                 required: "Name is required",
               })}
               placeholder="Write Your Full Name"
-              className="input input-bordered w-full dark:bg-gray-800 dark:text-gray-100"
+              className="input input-bordered w-full"
             />
             {errors.name_en && (
               <p className="text-error">{errors.name_en.message}</p>
@@ -82,12 +84,12 @@ const RegistrationForm = () => {
           </div>
           {/* Group*/}
           <div>
-            <label className="label dark:text-gray-300">Group *</label>
+            <label className="label">Group *</label>
             <select
               {...register("group", {
                 required: "group is required",
               })}
-              className="select select-bordered w-full dark:bg-gray-800 dark:text-gray-100"
+              className="select select-bordered w-full"
             >
               <option value="">Select</option>
               <option value="science">Science</option>
@@ -100,18 +102,17 @@ const RegistrationForm = () => {
           </div>
           {/* ssc_exam_roll*/}
           <div>
-            <label className="label dark:text-gray-300">SSC Exam Roll *</label>
+            <label className="label">SSC Exam Roll *</label>
             <input
               {...register("ssc_exam_roll", {
                 required: "ssc exam roll is required",
                 pattern: {
-                  value: /^01[0-9]{9}$/,
-                  message:
-                    "বাংলাদেশি মোবাইল নম্বর দিন (১১ ডিজিট)। যে নাম্বার থেকে ফি পাঠিয়েছেন।",
+                  value: /^[0-9]{6}$/,
+                  message: "সঠিক ৬ ডিজিটের রোল নম্বর দিন",
                 },
               })}
               placeholder="SSC Exam Roll"
-              className="input input-bordered w-full dark:bg-gray-800 dark:text-gray-100"
+              className="input input-bordered w-full"
             />
             {errors.ssc_exam_roll && (
               <p className="text-error">{errors.ssc_exam_roll.message}</p>
@@ -119,7 +120,7 @@ const RegistrationForm = () => {
           </div>
           {/* registration_number */}
           <div>
-            <label className="label dark:text-gray-300">
+            <label className="label">
               Registration Number *
             </label>
             <input
@@ -127,7 +128,7 @@ const RegistrationForm = () => {
                 required: " SSC Registration Number is Required",
               })}
               placeholder="Write SSC Registration Number"
-              className="input input-bordered w-full dark:bg-gray-800 dark:text-gray-100"
+              className="input input-bordered w-full"
             />
             {errors.ssc_regi_number && (
               <p className="text-error">{errors.ssc_regi_number.message}</p>
@@ -138,7 +139,7 @@ const RegistrationForm = () => {
         <div className="mb-6 grid grid-cols-1 gap-4 rounded-2xl border border-purple-100 bg-purple-50 p-3 md:grid-cols-2 md:p-6 shadow-sm">
           {/* School Name */}
           <div>
-            <label className="label dark:text-gray-300">
+            <label className="label">
               Institution Name *
             </label>
             <input
@@ -146,7 +147,7 @@ const RegistrationForm = () => {
                 required: "Institution Name is Required",
               })}
               placeholder="Your School Name"
-              className="input input-bordered w-full dark:bg-gray-800 dark:text-gray-100"
+              className="input input-bordered w-full"
             />
             {errors.institution_name && (
               <p className="text-error">{errors.institution_name.message}</p>
@@ -154,12 +155,12 @@ const RegistrationForm = () => {
           </div>
           {/* Tshirt Size */}
           <div>
-            <label className="label dark:text-gray-300">T-Shirt Size *</label>
+            <label className="label">T-Shirt Size *</label>
             <select
               {...register("tshirt_size", {
                 required: "tshirt size is required",
               })}
-              className="select select-bordered w-full dark:bg-gray-800 dark:text-gray-100"
+              className="select select-bordered w-full"
             >
               <option value="">Select</option>
               <option value="s">S</option>
@@ -176,7 +177,7 @@ const RegistrationForm = () => {
 
           {/* Bkash Number */}
           <div>
-            <label className="label dark:text-gray-300">
+            <label className="label">
               Bkash/Nagad Number *
             </label>
             <input
@@ -189,7 +190,7 @@ const RegistrationForm = () => {
                 },
               })}
               placeholder="Bkash/Nagad Number in 01XXXXXXXXX format"
-              className="input input-bordered w-full dark:bg-gray-800 dark:text-gray-100"
+              className="input input-bordered w-full"
             />
             {errors.sendmoney_number && (
               <p className="text-error">{errors.sendmoney_number.message}</p>
@@ -197,7 +198,7 @@ const RegistrationForm = () => {
           </div>
           {/* Transaction Id */}
           <div>
-            <label className="label dark:text-gray-300">Transaction Id *</label>
+            <label className="label">Transaction Id *</label>
             <input
               {...register("transaction_Id", {
                 required: "Transaction Id is required",
@@ -207,7 +208,7 @@ const RegistrationForm = () => {
                 },
               })}
               placeholder="Write Transaction Id"
-              className="input input-bordered w-full dark:bg-gray-800 dark:text-gray-100"
+              className="input input-bordered w-full"
             />
             {errors.transaction_Id && (
               <p className="text-error">{errors.transaction_Id.message}</p>
@@ -219,7 +220,7 @@ const RegistrationForm = () => {
         <div className="mb-6 grid grid-cols-1 gap-4 rounded-2xl border border-green-100 bg-green-50 p-3 md:grid-cols-2 md:p-6 shadow-sm">
           {/* Phone */}
           <div>
-            <label className="label dark:text-gray-300">Phone Number *</label>
+            <label className="label">Phone Number *</label>
             <input
               {...register("phone_number", {
                 required: "Phone number is required",
@@ -229,7 +230,7 @@ const RegistrationForm = () => {
                 },
               })}
               placeholder="Phone"
-              className="input input-bordered w-full dark:bg-gray-800 dark:text-gray-100"
+              className="input input-bordered w-full"
             />
             {errors.phone_number && (
               <p className="text-error">{errors.phone_number.message}</p>
@@ -238,7 +239,7 @@ const RegistrationForm = () => {
 
           {/* whatsapp */}
           <div>
-            <label className="label dark:text-gray-300">
+            <label className="label">
               Whatsapp Number *
             </label>
             <input
@@ -250,7 +251,7 @@ const RegistrationForm = () => {
                 },
               })}
               placeholder="Whatsapp Number"
-              className="input input-bordered w-full dark:bg-gray-800 dark:text-gray-100"
+              className="input input-bordered w-full"
             />
             {errors.whatsapp_number && (
               <p className="text-error">{errors.whatsapp_number.message}</p>
@@ -258,47 +259,47 @@ const RegistrationForm = () => {
           </div>
           {/* Present Adress */}
           <div>
-            <label className="label dark:text-gray-300">
+            <label className="label">
               Present Address *
             </label>
             <div className="flex gap-2">
               <input
                 {...register("present_area", { required: true })}
                 placeholder="Area"
-                className="input input-bordered w-full dark:bg-gray-800 dark:text-gray-100"
+                className="input input-bordered w-full"
               />
               <input
                 {...register("present_thana", { required: true })}
                 placeholder="Thana"
-                className="input input-bordered w-full dark:bg-gray-800 dark:text-gray-100"
+                className="input input-bordered w-full"
               />
               <input
                 {...register("present_zilla", { required: true })}
                 placeholder="Zilla"
-                className="input input-bordered w-full dark:bg-gray-800 dark:text-gray-100"
+                className="input input-bordered w-full"
               />
             </div>
           </div>
           {/* Permanent Adress */}
           <div>
-            <label className="label dark:text-gray-300">
+            <label className="label">
               Permanent Address *
             </label>
             <div className="flex gap-2">
               <input
                 {...register("permanent_area", { required: true })}
                 placeholder="Area"
-                className="input input-bordered w-full dark:bg-gray-800 dark:text-gray-100"
+                className="input input-bordered w-full"
               />
               <input
                 {...register("permanent_thana", { required: true })}
                 placeholder="Thana"
-                className="input input-bordered w-full dark:bg-gray-800 dark:text-gray-100"
+                className="input input-bordered w-full"
               />
               <input
                 {...register("permanent_zilla", { required: true })}
                 placeholder="Zilla"
-                className="input input-bordered w-full dark:bg-gray-800 dark:text-gray-100"
+                className="input input-bordered w-full"
               />
             </div>
           </div>
@@ -324,6 +325,52 @@ const RegistrationForm = () => {
           </button>
         </div>
       </form>
+
+      {showSuccessModal && (
+        <dialog className="modal modal-open">
+          <div className="modal-box max-w-lg bg-white rounded-2xl p-6 sm:p-8 shadow-2xl border border-slate-100">
+            <div className="text-center">
+              <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-emerald-50 mb-6">
+                <svg
+                  className="h-10 w-10 text-emerald-600"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="2"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+              <h2 className="text-2xl font-bold text-slate-900 mb-3">
+                রেজিস্ট্রেশন এবং পেমেন্ট যাচাইকরণ নোটিশ
+              </h2>
+              <p className="text-md text-slate-600 leading-relaxed mb-8">
+                আপনার রেজিস্ট্রেশন ফরমটি সফলভাবে সাবমিট করা হয়েছে। আমরা আপনার পাঠানো <strong>Bkash/Nagad</strong> ট্রানজেকশন আইডি এবং মোবাইল নম্বরটি ম্যানুয়ালি রিভিউ করছি। রিভিউ সম্পন্ন হলে আপনার রেজিস্ট্রেশন কনফার্ম করা হবে। নিচে আপনার রেজিস্টার্ড মোবাইল নম্বর দিয়ে সার্চ করে যেকোনো সময় বর্তমান স্ট্যাটাস জানতে পারবেন।
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowSuccessModal(false);
+                    navigate("/my-registration");
+                  }}
+                  className="w-full sm:w-auto px-8 py-3.5 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition duration-200 cursor-pointer"
+                  style={{
+                    backgroundImage: `linear-gradient(135deg, #173083 0%, #0b1a4a 100%)`,
+                  }}
+                >
+                  স্ট্যাটাস চেক করুন
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className="modal-backdrop bg-slate-900/50 backdrop-blur-sm"></div>
+        </dialog>
+      )}
     </>
   );
 };

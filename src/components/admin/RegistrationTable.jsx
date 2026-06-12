@@ -170,12 +170,13 @@ const RegistrationTable = ({ status }) => {
           <table className="table table-zebra w-full">
             <thead>
               <tr className="bg-gray-100">
-                <th className="text-left">Image</th>
-                <th className="text-left">Name (Bengali)</th>
-                <th className="text-left">Transaction ID</th>
-                <th className="text-left">Send Money #</th>
-                <th className="text-left">Phone</th>
-                <th className="text-left">Category</th>
+                <th className="text-left">Name / Institution</th>
+                <th className="text-left">SSC Roll & Reg</th>
+                <th className="text-left">Group</th>
+                <th className="text-center">T-Shirt</th>
+                <th className="text-left">Payment Details</th>
+                <th className="text-left">Contact Info</th>
+                <th className="text-left">Address (Present / Permanent)</th>
                 <th className="text-center">Status</th>
                 <th className="text-center">Actions</th>
               </tr>
@@ -184,41 +185,60 @@ const RegistrationTable = ({ status }) => {
               {registrations.map((reg) => (
                 <tr key={reg._id} className="hover:bg-gray-50">
                   <td>
-                    <ImageKitProvider urlEndpoint="https://ik.imagekit.io/atm">
-                      <Image
-                        src={reg.imageUrl}
-                        width={40}
-                        height={30}
-                        alt="Image"
-                      />
-                    </ImageKitProvider>
+                    <div className="font-semibold text-gray-900">
+                      {reg.name_en || reg.name_bn || "N/A"}
+                    </div>
+                    <div className="text-xs text-gray-500 font-medium">
+                      {reg.institution_name || "N/A"}
+                    </div>
                   </td>
                   <td>
-                    <div className="font-medium text-gray-900">
-                      {reg.name_bn}
+                    <div className="text-sm font-medium text-gray-800">
+                      Roll: <span className="font-mono text-xs">{reg.ssc_exam_roll || "N/A"}</span>
                     </div>
                     <div className="text-xs text-gray-500">
-                      {reg.daitto || "N/A"}
+                      Reg: <span className="font-mono">{reg.ssc_regi_number || "N/A"}</span>
                     </div>
                   </td>
                   <td>
-                    <span className="font-mono text-sm">
-                      {reg.transaction_Id}
+                    <span className="badge badge-sm badge-outline capitalize">
+                      {reg.group || "N/A"}
                     </span>
                   </td>
-                  <td>
-                    <span className="font-mono text-sm">
-                      {reg.sendmoney_number}
+                  <td className="text-center">
+                    <span className="font-bold uppercase text-gray-700">
+                      {reg.tshirt_size || "N/A"}
                     </span>
-                  </td>
-                  <td>
-                    <div className="text-sm">{reg.phone_number}</div>
                   </td>
                   <td>
                     <div className="text-xs space-y-1">
-                      <div className="badge badge-sm">{reg.sabek_bortoman}</div>
-                      <div className="badge badge-sm badge-outline">
-                        {reg.songotonik_man}
+                      <div>
+                        TxID: <span className="font-mono font-semibold text-blue-600">{reg.transaction_Id}</span>
+                      </div>
+                      <div>
+                        From: <span className="font-mono text-gray-600">{reg.sendmoney_number}</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div className="text-xs space-y-1">
+                      <div>
+                        Phone: <span className="font-mono">{reg.phone_number}</span>
+                      </div>
+                      <div>
+                        WA: <span className="font-mono">{reg.whatsapp_number || "N/A"}</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div className="text-xs space-y-1 max-w-[200px] whitespace-normal">
+                      <div>
+                        <span className="font-semibold text-gray-500">Pres: </span>
+                        {reg.present_area ? `${reg.present_area}, ${reg.present_thana}, ${reg.present_zilla}` : "N/A"}
+                      </div>
+                      <div>
+                        <span className="font-semibold text-gray-500">Perm: </span>
+                        {reg.permanent_area ? `${reg.permanent_area}, ${reg.permanent_thana}, ${reg.permanent_zilla}` : "N/A"}
                       </div>
                     </div>
                   </td>
@@ -230,35 +250,34 @@ const RegistrationTable = ({ status }) => {
                       {status}
                     </div>
                   </td>
-                  <td className="text-center inline-flex items-center justify-center gap-1">
-                    {/* Status Change Dropdown */}
-                    {status === "pending" && (
-                      <div className="flex gap-2 justify-center flex-wrap">
-                        <button
-                          onClick={() =>
-                            handleStatusChange(reg._id, "accepted")
-                          }
-                          disabled={isUpdating === reg._id}
-                          className="btn btn-xs btn-success"
-                          title="Accept"
-                        >
-                          ✓
-                        </button>
-                        <button
-                          onClick={() =>
-                            handleStatusChange(reg._id, "rejected")
-                          }
-                          disabled={isUpdating === reg._id}
-                          className="btn btn-xs btn-error"
-                          title="Reject"
-                        >
-                          ✗
-                        </button>
-                      </div>
-                    )}
+                  <td className="text-center">
+                    <div className="flex gap-2 justify-center flex-wrap">
+                      {status === "pending" && (
+                        <>
+                          <button
+                            onClick={() =>
+                              handleStatusChange(reg._id, "accepted")
+                            }
+                            disabled={isUpdating === reg._id}
+                            className="btn btn-xs btn-success"
+                            title="Accept"
+                          >
+                            ✓
+                          </button>
+                          <button
+                            onClick={() =>
+                              handleStatusChange(reg._id, "rejected")
+                            }
+                            disabled={isUpdating === reg._id}
+                            className="btn btn-xs btn-error"
+                            title="Reject"
+                          >
+                            ✗
+                          </button>
+                        </>
+                      )}
 
-                    {(status === "accepted" || status === "rejected") && (
-                      <div className="flex gap-2 justify-center flex-wrap">
+                      {(status === "accepted" || status === "rejected") && (
                         <button
                           onClick={() => handleStatusChange(reg._id, "pending")}
                           disabled={isUpdating === reg._id}
@@ -267,18 +286,17 @@ const RegistrationTable = ({ status }) => {
                         >
                           ↶
                         </button>
-                      </div>
-                    )}
+                      )}
 
-                    {/* Delete Button */}
-                    <button
-                      onClick={() => handleDelete(reg._id)}
-                      disabled={isDeleting === reg._id}
-                      className="btn btn-xs btn-outline btn-error ml-2"
-                      title="Delete"
-                    >
-                      🗑
-                    </button>
+                      <button
+                        onClick={() => handleDelete(reg._id)}
+                        disabled={isDeleting === reg._id}
+                        className="btn btn-xs btn-outline btn-error ml-2"
+                        title="Delete"
+                      >
+                        🗑
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}

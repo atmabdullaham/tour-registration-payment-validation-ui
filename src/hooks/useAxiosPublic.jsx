@@ -10,4 +10,3 @@ const useAxiosPublic = () => {
 
 export default useAxiosPublic;
 
-// https://mediumpurple-bison-837194.hostingersite.com

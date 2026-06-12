@@ -1,12 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Tiro+Bangla:ital@0;1&display=swap");
 @import "tailwindcss";
-@plugin "daisyui";
+@plugin "daisyui" {
+  themes: light --default;
+}
 
 @theme {
   --color-brand-primary: #173083;
   --color-brand-secondary: #00A3DF;
   --color-brand-accent: #E3000F;
   --color-brand-light: #f0f7fb;
+}
+
+:root {
+  color-scheme: light only;
 }
 
 html,

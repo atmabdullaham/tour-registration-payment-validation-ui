@@ -23,7 +23,8 @@ const Footer = () => {
               </div>
             </div>
             <p className="mt-4 text-sm text-brand-secondary/80 max-w-xs mx-auto md:mx-0">
-              Bangladesh Islami Chhatrashibir<br/>
+              Bangladesh Islami Chhatrashibir
+              <br />
               Chattogram City North
             </p>
           </div>
@@ -61,7 +62,7 @@ const Footer = () => {
                       href="tel:0123456789"
                       className="mt-1 block transition-colors hover:text-white"
                     >
-                      ০১২৩৪-৫৬৭৮৯০
+                      01882137803
                     </a>
                   </div>
                 </div>
@@ -75,13 +76,20 @@ const Footer = () => {
           {/* Bottom Copyright */}
           <div className="flex flex-col items-center gap-4 text-center md:flex-row md:justify-between md:text-left">
             <p className="text-sm text-gray-400">
-              Copyright © {currentYear} Bangladesh Islami Chhatrashibir. সকল অধিকার সংরক্ষিত
+              Copyright © {currentYear} Bangladesh Islami Chhatrashibir. সকল
+              অধিকার সংরক্ষিত
             </p>
             <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-gray-400">
-              <a href="#" className="transition-colors hover:text-brand-secondary">
+              <a
+                href="#"
+                className="transition-colors hover:text-brand-secondary"
+              >
                 গোপনীয়তা নীতি
               </a>
-              <a href="#" className="transition-colors hover:text-brand-secondary">
+              <a
+                href="#"
+                className="transition-colors hover:text-brand-secondary"
+              >
                 শর্তাবলী
               </a>
             </div>
