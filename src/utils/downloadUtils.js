@@ -11,7 +11,7 @@ const waitForDocumentFonts = async () => {
     await document.fonts.load('16px "Tiro Bangla"');
     await document.fonts.ready;
   } catch (error) {
-    console.warn("Font loading wait failed:", error);
+    // Font loading is best-effort; continue with download
   }
 };
 
@@ -95,7 +95,6 @@ export const downloadPNG = async (element, fileName = "result.png") => {
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
   } catch (error) {
-    console.error("Error downloading PNG:", error);
     throw new Error(error?.message || "Failed to download image");
   }
 };

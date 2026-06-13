@@ -21,12 +21,7 @@ const RegistrationForm = () => {
     try {
       setLoading(true);
 
-      console.log("Submitting registration form with data:", data);
-
-      // Call the backend registration API
       const response = await axiosPublic.post("/registration", data);
-
-      console.log("Backend response:", response.data);
 
       if (response.data.success || response.data.insertedId) {
         toast.success("Registration successful!");
@@ -36,12 +31,10 @@ const RegistrationForm = () => {
         toast.error("Registration failed");
       }
     } catch (error) {
-      console.error("Registration error:", error);
       const errorMsg =
         error.response?.data?.message ||
         error.message ||
         "Registration failed. Please try again";
-      console.error("Error details:", errorMsg);
       toast.error(errorMsg);
     } finally {
       setLoading(false);

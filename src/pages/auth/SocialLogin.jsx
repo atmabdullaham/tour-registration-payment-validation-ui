@@ -12,16 +12,11 @@ const SocialLogin = () => {
   const handleGoogleSignIn = async () => {
     try {
       const result = await signInGoogle();
-      console.log(result.user);
       const userInfo = {
         email: result.user.email,
         displayName: result.user.displayName,
         photoURL: result.user.photoURL,
       };
-      console.log(userInfo);
-
-      // Get the ID token immediately from the sign-in result
-      // (don't wait for context to update, which is async)
       const idToken = await result.user.getIdToken();
       const config = {
         headers: {
@@ -29,15 +24,10 @@ const SocialLogin = () => {
         },
       };
 
-      const res = await axiosSecure.post("/users", userInfo, config);
-      if (res.data.insertedId) {
-        console.log("user created in the database");
-      }
-      console.log(res.data.message);
+      await axiosSecure.post("/users", userInfo, config);
       navigate(location.state || "/");
       toast.success("Login successful");
     } catch (err) {
-      console.log(err);
       toast.error(
         "Login failed: " + (err?.response?.data?.message || err?.message),
       );

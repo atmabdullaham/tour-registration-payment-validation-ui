@@ -67,7 +67,6 @@ const Contact = () => {
         setSuccess("");
       }, 5000);
     } catch (err) {
-      console.error("Error:", err);
       setError(
         err.message || "কোনো ত্রুটি ঘটেছে। দয়া করে পুনরায় চেষ্টা করুন।",
       );

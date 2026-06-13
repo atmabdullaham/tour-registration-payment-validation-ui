@@ -47,9 +47,6 @@ const DashboardStatistics = () => {
 
   if (!stats) return null;
 
-  console.log("Stats data:", stats);
-  console.log("Accepted stats data:", acceptedStats);
-
   return (
     <div className="space-y-8">
       {/* Status Overview */}
