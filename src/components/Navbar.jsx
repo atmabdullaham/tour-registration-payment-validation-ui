@@ -3,9 +3,11 @@ import toast from "react-hot-toast";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import Logo from "./Logo";
+import useAdmin from "../hooks/useAdmin";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [isAdmin] = useAdmin();
   const handleLogout = () => {
     logOut().then(() => {
       toast.success("Logged out");
@@ -139,6 +141,13 @@ const Navbar = () => {
               <li className="px-4 py-2 border-b border-gray-100 text-brand-primary font-bold">
                 {user?.displayName}
               </li>
+              {isAdmin && (
+                <li>
+                  <Link to="/admin/dashboard" className="text-brand-primary font-semibold">
+                    অ্যাডমিন ড্যাশবোর্ড
+                  </Link>
+                </li>
+              )}
               <li>
                 <button onClick={handleLogout} className="text-brand-accent hover:bg-red-50 mt-1 font-semibold">
                   লগ আউট
