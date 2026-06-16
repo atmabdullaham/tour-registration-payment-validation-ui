@@ -2,8 +2,8 @@ import { useContext } from "react";
 import toast from "react-hot-toast";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
-import Logo from "./Logo";
 import useAdmin from "../hooks/useAdmin";
+import Logo from "./Logo";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -48,21 +48,6 @@ const Navbar = () => {
 
       <li>
         <NavLink
-          to="/about"
-          className={({ isActive, isPending }) =>
-            isPending
-              ? "pending"
-              : isActive
-                ? "text-brand-primary border-brand-accent font-bold animated-border"
-                : "hover:text-brand-secondary"
-          }
-        >
-          পরিচিতি
-        </NavLink>
-      </li>
-
-      <li>
-        <NavLink
           to="/contact"
           className={({ isActive, isPending }) =>
             isPending
@@ -82,7 +67,11 @@ const Navbar = () => {
     <div className="navbar bg-white shadow-md border-b-2 border-brand-primary/10 sticky top-0 z-50">
       <div className="navbar-start">
         <div className="dropdown">
-          <div tabIndex={0} role="button" className="lg:hidden p-2 text-brand-primary">
+          <div
+            tabIndex={0}
+            role="button"
+            className="lg:hidden p-2 text-brand-primary"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
@@ -113,7 +102,9 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 gap-2text-gray-700 font-medium">{navOptions}</ul>
+        <ul className="menu menu-horizontal px-1 gap-2text-gray-700 font-medium">
+          {navOptions}
+        </ul>
       </div>
       <div className="navbar-end pr-0 sm:pr-4">
         <NavLink
@@ -133,7 +124,10 @@ const Navbar = () => {
                 <img
                   referrerPolicy="no-referrer"
                   alt="User Profile"
-                  src={user?.photoURL || "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"}
+                  src={
+                    user?.photoURL ||
+                    "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
+                  }
                 />
               </div>
             </div>
@@ -143,13 +137,19 @@ const Navbar = () => {
               </li>
               {isAdmin && (
                 <li>
-                  <Link to="/admin/dashboard" className="text-brand-primary font-semibold">
+                  <Link
+                    to="/admin/dashboard"
+                    className="text-brand-primary font-semibold"
+                  >
                     অ্যাডমিন ড্যাশবোর্ড
                   </Link>
                 </li>
               )}
               <li>
-                <button onClick={handleLogout} className="text-brand-accent hover:bg-red-50 mt-1 font-semibold">
+                <button
+                  onClick={handleLogout}
+                  className="text-brand-accent hover:bg-red-50 mt-1 font-semibold"
+                >
                   লগ আউট
                 </button>
               </li>

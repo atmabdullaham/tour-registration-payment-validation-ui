@@ -248,7 +248,7 @@ const MyRegistration = () => {
                   </p>
                   {searchedPhone && (
                     <p className="mt-2 text-xs text-slate-500">
-                      খোঁজা নম্বর:{" "}
+                      নম্বর:{" "}
                       <span className="font-mono font-bold text-slate-700">
                         {maskPhone(searchedPhone)}
                       </span>
