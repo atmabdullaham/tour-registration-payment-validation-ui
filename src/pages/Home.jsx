@@ -12,7 +12,7 @@ const Home = () => {
       <RegistrationTimer />
       <ApplicationSteps />
       <Guest />
-      <EventDetails />
+      {/* <EventDetails /> */}
       <FAQ />
     </div>
   );

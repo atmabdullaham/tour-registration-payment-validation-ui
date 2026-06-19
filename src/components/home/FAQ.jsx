@@ -28,7 +28,7 @@ const FAQ = () => {
     {
       question: "রেজিস্ট্রেশন ফি কত এবং কীভাবে পরিশোধ করব?",
       answer:
-        "রেজিস্ট্রেশন ফি ৫০০ টাকা। বিকাশ/নগদ নাম্বার 01859902430 এ সেন্ড মানি করে ট্রানজেকশন আইডি কপি করে রেজিস্ট্রেশন ফরমে জমা দিন।",
+        "রেজিস্ট্রেশন ফি ৩৫০ টাকা। বিকাশ/নগদ নাম্বার 01859902430 এ সেন্ড মানি করে ট্রানজেকশন আইডি কপি করে রেজিস্ট্রেশন ফরমে জমা দিন।",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -49,7 +49,7 @@ const FAQ = () => {
     {
       question: "রেজিস্ট্রেশনের শেষ তারিখ কত?",
       answer:
-        "রেজিস্ট্রেশনের শেষ তারিখ ১৮ জুন ২০২৬। ডেডলাইনের পরে কোনো রেজিস্ট্রেশন গ্রহণ করা হবে না, তাই দ্রুত রেজিস্ট্রেশন সম্পন্ন করুন।",
+        "রেজিস্ট্রেশনের শেষ তারিখ ২০ জুন ২০২৬। ডেডলাইনের পরে কোনো রেজিস্ট্রেশন গ্রহণ করা হবে না, তাই দ্রুত রেজিস্ট্রেশন সম্পন্ন করুন।",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -70,7 +70,7 @@ const FAQ = () => {
     {
       question: "ইভেন্টের ভেন্যু ও সময় কী?",
       answer:
-        "ইভেন্টটি ২৪ জুন ২০২৬ তারিখে Foy's Lake Concord Amusement World, চট্টগ্রামে অনুষ্ঠিত হবে। রিপোর্টিং টাইম বিকাল ২:৩০।",
+        "ইভেন্টটি ২৪ জুন ২০২৬ তারিখে Foy's Lake Concord Amusement World, চট্টগ্রামে অনুষ্ঠিত হবে।",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -212,11 +212,10 @@ const FAQ = () => {
             return (
               <div
                 key={index}
-                className={`group bg-white rounded-2xl border transition-all duration-300 overflow-hidden ${
-                  isOpen
+                className={`group bg-white rounded-2xl border transition-all duration-300 overflow-hidden ${isOpen
                     ? "border-brand-primary/20 shadow-lg shadow-brand-primary/5"
                     : "border-slate-100 shadow-sm hover:border-brand-secondary/20 hover:shadow-md hover:shadow-brand-secondary/5"
-                }`}
+                  }`}
               >
                 <button
                   id={`faq-toggle-${index}`}
@@ -227,33 +226,30 @@ const FAQ = () => {
                 >
                   {/* Icon */}
                   <div
-                    className={`flex-shrink-0 p-2 md:p-2.5 rounded-xl transition-all duration-300 ${
-                      isOpen
+                    className={`flex-shrink-0 p-2 md:p-2.5 rounded-xl transition-all duration-300 ${isOpen
                         ? "bg-brand-primary text-white"
                         : "bg-brand-light text-brand-primary group-hover:bg-brand-secondary/10"
-                    }`}
+                      }`}
                   >
                     {faq.icon}
                   </div>
 
                   {/* Question Text */}
                   <span
-                    className={`flex-1 text-sm md:text-base font-bold transition-colors duration-300 ${
-                      isOpen
+                    className={`flex-1 text-sm md:text-base font-bold transition-colors duration-300 ${isOpen
                         ? "text-brand-primary"
                         : "text-slate-700 group-hover:text-brand-primary"
-                    }`}
+                      }`}
                   >
                     {faq.question}
                   </span>
 
                   {/* Toggle Arrow */}
                   <div
-                    className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
-                      isOpen
+                    className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${isOpen
                         ? "bg-brand-primary text-white rotate-180"
                         : "bg-slate-100 text-slate-400 group-hover:bg-brand-secondary/10 group-hover:text-brand-secondary"
-                    }`}
+                      }`}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

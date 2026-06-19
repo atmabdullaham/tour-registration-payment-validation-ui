@@ -11,7 +11,7 @@ const toBanglaNumber = (number) => {
 };
 
 const RegistrationTimer = () => {
-  const [enrollmentEnd] = useState(new Date("2026-06-18T11:59:59"));
+  const [enrollmentEnd] = useState(new Date("2026-06-20T23:59:59"));
   const [currentTime, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
@@ -193,7 +193,7 @@ const RegistrationTimer = () => {
               <span>
                 ডেডলাইন:{" "}
                 <strong className="text-brand-accent text-lg">
-                  ১৮ জুন ২০ ২৬
+                  ২০ জুন, ২০২৬
                 </strong>
               </span>
             </div>

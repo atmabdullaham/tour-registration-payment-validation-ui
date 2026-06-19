@@ -17,7 +17,7 @@ const EventDetails = () => {
       "Free Rides",
       "Cultural Evening",
     ],
-    organizer: "Bangladesh Islami Chhatrashibir",
+    organizer: "Bangladesh Islami Chattra Shibir",
     branch: "Chattogram City North",
   };
 
