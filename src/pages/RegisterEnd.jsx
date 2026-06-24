@@ -15,7 +15,7 @@ const RegisterEnd = () => {
 
   // Check if registration is still active
   // You can update this date as needed
-  const registrationDeadline = new Date("2026-05-26T23:59:59").getTime();
+  const registrationDeadline = new Date("2026-06-20T23:59:59").getTime();
 
   useEffect(() => {
     const checkRegistrationStatus = () => {

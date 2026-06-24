@@ -108,7 +108,7 @@ const Navbar = () => {
       </div>
       <div className="navbar-end pr-0 sm:pr-4">
         <NavLink
-          className="btn btn-sm sm:btn-md rounded-full text-white bg-brand-primary hover:bg-brand-secondary border-none shadow-md shadow-brand-primary/30 mr-2"
+          className="btn  btn-sm sm:btn-md rounded-full text-white bg-brand-primary hover:bg-brand-secondary border-none shadow-md shadow-brand-primary/30 mr-2"
           to="/registration"
         >
           রেজিস্ট্রেশন

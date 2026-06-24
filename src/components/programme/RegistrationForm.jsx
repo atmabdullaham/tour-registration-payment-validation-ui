@@ -21,7 +21,18 @@ const RegistrationForm = () => {
     try {
       setLoading(true);
 
-      const response = await axiosPublic.post("/registration", data);
+      // Sanitize: trim whitespace & uppercase transaction_Id before sending
+      const cleanedData = {
+        ...data,
+        transaction_Id: data.transaction_Id?.trim().toUpperCase(),
+        phone_number: data.phone_number?.trim(),
+        whatsapp_number: data.whatsapp_number?.trim(),
+        sendmoney_number: data.sendmoney_number?.trim(),
+        ssc_exam_roll: data.ssc_exam_roll?.trim(),
+        ssc_regi_number: data.ssc_regi_number?.trim(),
+      };
+
+      const response = await axiosPublic.post("/registration", cleanedData);
 
       if (response.data.success || response.data.insertedId) {
         toast.success("Registration successful!");
@@ -31,10 +42,11 @@ const RegistrationForm = () => {
         toast.error("Registration failed");
       }
     } catch (error) {
+      console.error("Registration submit error:", error);
       const errorMsg =
         error.response?.data?.message ||
         error.message ||
-        "Registration failed. Please try again";
+        "Registration failed. Please try again.";
       toast.error(errorMsg);
     } finally {
       setLoading(false);
@@ -98,10 +110,10 @@ const RegistrationForm = () => {
             <label className="label">SSC Exam Roll *</label>
             <input
               {...register("ssc_exam_roll", {
-                required: "ssc exam roll is required",
+                required: "SSC Exam Roll is required",
                 pattern: {
-                  value: /^[0-9]{6}$/,
-                  message: "সঠিক ৬ ডিজিটের রোল নম্বর দিন",
+                  value: /^[0-9]{5,8}$/,
+                  message: "সঠিক ৫-৮ ডিজিটের রোল নম্বর দিন",
                 },
               })}
               placeholder="SSC Exam Roll"
@@ -196,8 +208,8 @@ const RegistrationForm = () => {
               {...register("transaction_Id", {
                 required: "Transaction Id is required",
                 pattern: {
-                  value: /^(?=.*[A-Z])(?=.*\d)[A-Z0-9]{8,15}$/,
-                  message: "সঠিক Transaction Id দিন",
+                  value: /^[A-Za-z0-9]{6,20}$/,
+                  message: "Transaction ID হবে ৬-২০ অক্ষরের, শুধু অক্ষর ও সংখ্যা (Bkash/Nagad TrxID)",
                 },
               })}
               placeholder="Write Transaction Id"
