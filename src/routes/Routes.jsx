@@ -1,5 +1,4 @@
 import { createBrowserRouter } from "react-router-dom";
-import RegistrationForm from "../components/programme/RegistrationForm";
 import Layout from "../layouts/Layout";
 
 import AdminDashboard from "../pages/AdminDashboard";
@@ -30,7 +29,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/registration",
-        element: <RegistrationForm />,
+        element: <RegisterEnd />,
       },
       {
         path: "/my-registration",
